@@ -11,6 +11,11 @@ class AddNoteCubit extends Cubit<PatternState<String>> {
   String _title = '';
   String _content = '';
 
+  void resetContent() {
+    _title = '';
+    _content = '';
+  }
+
   void setContent(String content) {
     _content = content;
   }

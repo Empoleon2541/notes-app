@@ -55,14 +55,17 @@ class NotesDisplay extends StatelessWidget {
             ),
           ),
         ),
-        Container(
-            decoration: BoxDecoration(border: Border.all(width: 2)),
-            height: 100,
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-              child: Text(note.content),
-            )),
+        if (note.content.isNotEmpty) ...[
+          Container(
+              decoration: BoxDecoration(border: Border.all(width: 2)),
+              height: 100,
+              width: double.infinity,
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+                child: Text(note.content),
+              )),
+        ]
       ],
     );
   }
@@ -108,9 +111,7 @@ class _DeleteButton extends StatelessWidget {
     return IconButton(
         onPressed: () {
           context.read<RemoveNoteCubit>().removeNote(id);
-          Future.delayed(const Duration(milliseconds: 500), () {
-            context.read<NotesCubit>().getNotes();
-          });
+          context.read<NotesCubit>().getNotes();
         },
         icon: const Icon(Icons.delete));
   }
